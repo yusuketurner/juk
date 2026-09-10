@@ -1,0 +1,50 @@
+/* Kirameki stationery illustration system
+   Hand-drawn vector-like motifs: pencil, notebook, ruler, eraser and paper notes. */
+:root{--st-ink:#47685a;--st-orange:#e98b5c;--st-pink:#f4cbd4;--st-yellow:#ffe48d;--st-blue:#cfe9f2;--st-paper:#fffdf5}
+
+/* Keep large Japanese headlines inside the viewport at every desktop width. */
+@media (min-width:901px){
+  .page-hero h1,.ac-hero h1,.pr-hero h1{font-size:clamp(52px,6.6vw,92px);max-width:900px}
+  .ac-hero h1,.pr-hero h1{overflow-wrap:normal;word-break:keep-all}
+}
+
+/* Common stationery doodle layer. The drawings are CSS/SVG, so there are no low-res external assets. */
+.world-hero,.page-hero,.ac-hero,.pr-hero,.en-hero,.ab-hero,.people-hero,.about-hero{position:relative}
+
+.world-hero:before,.page-hero:before,.ac-hero:before,.pr-hero:before{content:"";position:absolute;z-index:1;width:150px;height:150px;pointer-events:none;background-repeat:no-repeat;background-size:contain;opacity:.95}
+
+/* Pencil */
+.world-hero:before,.page-hero:before{left:3%;top:15%;transform:rotate(-24deg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 70'%3E%3Cpath d='M10 20h118v30H10z' fill='%23e98b5c'/%3E%3Cpath d='M128 20l34 15-34 15z' fill='%23f4d5a7'/%3E%3Cpath d='M162 35l10-5v10z' fill='%2347695a'/%3E%3Cpath d='M28 20v30M48 20v30' stroke='%23ffe48d' stroke-width='6'/%3E%3Cpath d='M10 20h118v30H10z' fill='none' stroke='%2347695a' stroke-width='3'/%3E%3C/svg%3E")}
+
+/* Notebook */
+.ac-hero:before,.pr-hero:before{right:5%;top:10%;width:190px;height:170px;transform:rotate(7deg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 170'%3E%3Crect x='20' y='12' width='145' height='135' rx='9' fill='%23fffdf5' stroke='%2347695a' stroke-width='5'/%3E%3Cpath d='M43 45h98M43 68h98M43 91h98M43 114h70' stroke='%23c7dfe3' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M32 25v115' stroke='%23f4cbd4' stroke-width='4'/%3E%3Ccircle cx='12' cy='35' r='5' fill='%2347695a'/%3E%3Ccircle cx='12' cy='70' r='5' fill='%2347695a'/%3E%3Ccircle cx='12' cy='105' r='5' fill='%2347695a'/%3E%3C/svg%3E")}
+
+/* Ruler + eraser as a small floating pair */
+.world-hero:after,.page-hero:after,.ac-hero:after,.pr-hero:after{content:"";position:absolute;z-index:4;right:8%;bottom:9%;width:175px;height:90px;pointer-events:none;background-repeat:no-repeat;background-size:contain;transform:rotate(-9deg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 100'%3E%3Crect x='8' y='16' width='150' height='45' rx='7' fill='%23cfe9f2' stroke='%2347695a' stroke-width='4'/%3E%3Cpath d='M25 16v18M43 16v28M61 16v18M79 16v28M97 16v18M115 16v28M133 16v18' stroke='%2347695a' stroke-width='3'/%3E%3Crect x='142' y='56' width='63' height='32' rx='8' fill='%23f4cbd4' stroke='%2347695a' stroke-width='4' transform='rotate(8 142 56)'/%3E%3C/svg%3E")}
+
+/* Paperclip / sticky-note motif for information pages. */
+.page-hero .eyebrow:after,.ac-route .eyebrow:after,.pr-intro .eyebrow:after{content:"✦";display:inline-grid;place-items:center;margin-left:10px;width:23px;height:23px;border-radius:7px;background:var(--st-yellow);color:var(--st-ink);font-size:13px;transform:rotate(8deg)}
+
+/* Homepage: stationery sits behind the photo so it feels like one visual world. */
+.home-world .world-hero:before{z-index:2;left:2%;top:20%;width:180px}
+.home-world .world-hero:after{z-index:3;right:41%;bottom:11%;width:145px}
+.home-world .world-hero-art:before{content:"";position:absolute;z-index:2;left:4%;top:3%;width:120px;height:120px;border-radius:50%;background:var(--st-yellow);opacity:.7;transform:rotate(-8deg);pointer-events:none}
+.home-world .world-hero-art:after{content:"✎  NOTE";position:absolute;z-index:8;right:2%;bottom:18%;padding:9px 13px;background:#fff;border:2px solid var(--st-ink);border-radius:9px;color:var(--st-ink);font:900 10px 'DM Sans',sans-serif;letter-spacing:.08em;transform:rotate(-7deg);box-shadow:5px 6px 0 #47685a22}
+
+/* Section accents: subtle, not clip-art. */
+.world-intro:after{content:"";position:absolute;right:6vw;margin-top:-120px;width:110px;height:75px;opacity:.7;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 80'%3E%3Cpath d='M8 12h104v56H8z' fill='%23fffdf5' stroke='%2347695a' stroke-width='4'/%3E%3Cpath d='M20 28h78M20 43h62M20 57h43' stroke='%23c7dfe3' stroke-width='4'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+
+/* Page-specific stationery language */
+.study-world .page-hero:before{background-color:transparent}
+.people-world .page-hero:before{transform:rotate(16deg)}
+.about-world .page-hero:before{transform:rotate(-14deg)}
+
+/* Reduce decorative density on small screens, but retain recognizable motifs. */
+@media(max-width:900px){
+  .world-hero:before,.page-hero:before,.ac-hero:before,.pr-hero:before{width:90px;height:90px;opacity:.75}
+  .world-hero:after,.page-hero:after,.ac-hero:after,.pr-hero:after{width:105px;height:55px;right:4%;bottom:4%;opacity:.7}
+  .home-world .world-hero-art:before{width:75px;height:75px}
+  .home-world .world-hero-art:after{right:3%;bottom:10%;font-size:8px}
+}
+
+@media(prefers-reduced-motion:reduce){.world-hero:before,.page-hero:before,.ac-hero:before,.pr-hero:before{transform:none}.home-world .world-hero-art:after{transform:none}}
