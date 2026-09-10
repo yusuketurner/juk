@@ -36,6 +36,8 @@ jobs:
                   text = text.replace('</head>', '<link rel="stylesheet" href="stationery.css"></head>')
               if path.name == 'index.html' and 'home-rhythm.css' not in text and '</head>' in text:
                   text = text.replace('</head>', '<link rel="stylesheet" href="home-rhythm.css"></head>')
+              if path.name == 'index.html' and 'home-rhythm-v2.css' not in text and '</head>' in text:
+                  text = text.replace('</head>', '<link rel="stylesheet" href="home-rhythm-v2.css"></head>')
               if 'footer-sitemap' not in text and '</footer>' in text:
                   text = text.replace('</footer>', sitemap + '</footer>')
               if path.name == 'index.html':
