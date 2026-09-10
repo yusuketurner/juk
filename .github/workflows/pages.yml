@@ -19,15 +19,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Add stationery illustration layer
+      - name: Add stationery illustration layer and footer sitemap
         run: |
           python - <<'PY'
           from pathlib import Path
+
+          sitemap = '''<div class="footer-sitemap"><div class="footer-sitemap-title"><span>SITEMAP</span><strong>サイトマップ</strong></div><nav class="footer-sitemap-links" aria-label="サイトマップ"><a href="index.html">TOP</a><a href="about.html">私たち</a><a href="study.html">学習塾</a><a href="abacus.html">そろばん</a><a href="english.html">英語</a><a href="price.html">料金</a><a href="teacher.html">先生</a><a href="access.html">アクセス</a><a href="blog.html">ブログ</a><a href="contact.html">無料体験・お問い合わせ</a><a href="privacy.html">プライバシーポリシー</a><a href="sitemap.html">サイトマップ</a></nav></div>'''
+
           for path in Path('.').glob('*.html'):
               text = path.read_text(encoding='utf-8')
               if 'stationery.css' not in text and '</head>' in text:
                   text = text.replace('</head>', '<link rel="stylesheet" href="stationery.css"></head>')
-                  path.write_text(text, encoding='utf-8')
+              if 'footer-sitemap' not in text and '</footer>' in text:
+                  text = text.replace('</footer>', sitemap + '</footer>')
+              path.write_text(text, encoding='utf-8')
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
