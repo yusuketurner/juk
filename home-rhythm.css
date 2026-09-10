@@ -1,0 +1,51 @@
+/* TOP: image breaks + illustration rhythm inspired by editorial brand sites. */
+.home-world .visual-break{position:relative;overflow:hidden;min-height:620px;padding:90px 6vw;background:#fffdf7}
+.home-world .visual-break-inner{max-width:1180px;margin:auto;position:relative;min-height:440px}
+.home-world .visual-break-photo{position:absolute;overflow:hidden;border:9px solid #fff;box-shadow:18px 22px 0 rgba(71,104,90,.14)}
+.home-world .visual-break-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.home-world .visual-break-photo:hover img{transform:scale(1.045)}
+.home-world .break-photo-main{width:64%;height:440px;left:3%;top:25px;border-radius:54px;transform:rotate(-2.4deg)}
+.home-world .break-photo-side{width:31%;height:285px;right:2%;bottom:10px;border-radius:40px;transform:rotate(4deg);z-index:3}
+.home-world .visual-break-copy{position:absolute;right:4%;top:8%;z-index:5;width:300px;background:#ffe48d;padding:28px 30px;border-radius:28px 10px 30px 12px;box-shadow:9px 11px 0 rgba(71,104,90,.16);transform:rotate(3deg)}
+.home-world .visual-break-copy span{display:block;font:900 10px/1 'DM Sans',sans-serif;letter-spacing:.2em;margin-bottom:10px}
+.home-world .visual-break-copy strong{display:block;font-size:31px;line-height:1.05;letter-spacing:-.05em}
+.home-world .visual-break-copy p{font-size:12px;line-height:1.8;margin:12px 0 0;color:#607b70}
+.home-world .visual-break-doodle{position:absolute;z-index:6;pointer-events:none}
+.home-world .break-pencil{left:60%;bottom:2%;font-size:78px;color:#df8797;transform:rotate(-28deg)}
+.home-world .break-star{right:0;top:34%;font-size:78px;color:#78a391;transform:rotate(14deg)}
+.home-world .break-note{left:0;bottom:4%;background:#fff;border:3px solid #47685a;border-radius:8px;padding:12px 18px;font:900 11px/1.2 'DM Sans',sans-serif;letter-spacing:.1em;transform:rotate(-6deg);box-shadow:5px 6px 0 rgba(71,104,90,.13)}
+
+.home-world .world-menu{padding-top:150px;padding-bottom:150px}
+.home-world .world-menu-grid{gap:28px}
+.home-world .world-menu-card{min-height:455px}
+.home-world .world-menu-card:after{content:"";position:absolute;right:-28px;top:-28px;width:105px;height:105px;border:3px dashed rgba(71,104,90,.25);border-radius:50%;transform:rotate(12deg);pointer-events:none}
+.home-world .study-card:before,.home-world .abacus-card:before,.home-world .english-card:before{content:"✦";position:absolute;right:28px;top:27px;font-size:20px;color:rgba(71,104,90,.48);transform:rotate(12deg)}
+
+.home-world .visual-break-second{min-height:560px;padding:70px 6vw 120px;background:#dff3e8}
+.home-world .visual-break-second .visual-break-inner{min-height:380px}
+.home-world .second-photo-main{width:48%;height:360px;right:4%;top:15px;border-radius:48px;transform:rotate(3deg)}
+.home-world .second-photo-side{width:34%;height:245px;left:7%;bottom:0;border-radius:34px;transform:rotate(-5deg);z-index:3}
+.home-world .second-copy{left:5%;top:7%;right:auto;background:#fffdf7;width:330px;transform:rotate(-2deg)}
+.home-world .second-doodle{left:48%;top:2%;font-size:65px;color:#e98b5c;transform:rotate(10deg)}
+.home-world .second-circle{right:44%;bottom:1%;width:100px;height:100px;border:3px solid #78a391;border-radius:50%;transform:rotate(-8deg)}
+
+@media(max-width:900px){
+  .home-world .visual-break{min-height:auto;padding:75px 20px 95px}
+  .home-world .visual-break-inner{min-height:680px}
+  .home-world .break-photo-main{width:88%;height:360px;left:2%;top:30px}
+  .home-world .break-photo-side{width:62%;height:230px;right:1%;bottom:45px}
+  .home-world .visual-break-copy{width:235px;right:0;top:285px;padding:20px 22px}
+  .home-world .visual-break-copy strong{font-size:26px}
+  .home-world .break-pencil{left:53%;bottom:0;font-size:54px}
+  .home-world .break-star{right:0;top:20%;font-size:54px}
+  .home-world .break-note{left:0;bottom:4%;font-size:9px}
+  .home-world .world-menu{padding-top:100px;padding-bottom:100px}
+  .home-world .world-menu-card{min-height:360px}
+  .home-world .visual-break-second{min-height:auto;padding:65px 20px 90px}
+  .home-world .visual-break-second .visual-break-inner{min-height:610px}
+  .home-world .second-photo-main{width:84%;height:330px;right:1%;top:25px}
+  .home-world .second-photo-side{width:60%;height:220px;left:0;bottom:20px}
+  .home-world .second-copy{left:0;top:275px;width:235px}
+  .home-world .second-doodle{left:auto;right:8%;top:0;font-size:48px}
+  .home-world .second-circle{right:3%;bottom:0;width:75px;height:75px}
+}
