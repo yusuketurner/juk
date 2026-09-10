@@ -52,3 +52,20 @@ if(document.body.classList.contains('home-world')){
 }
 
 const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));const parallax=[...document.querySelectorAll('.parallax,.hero-visual,.flexible-image,.page-photo')];const motion=[...document.querySelectorAll('.choice-card,.story-card,.price-panel,.final-image,.gallery .g')];let ticking=false;function move(){const vh=innerHeight;const y=window.scrollY;parallax.forEach((el,i)=>{const r=el.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const speed=Number(el.dataset.speed||(.045+(i%3)*.018));const p=(vh/2-(r.top+r.height/2))/vh;el.style.setProperty('--py',`${p*55*speed*10}px`);el.style.setProperty('--scale',`${1+Math.min(.035,Math.abs(p)*.035)}`)}});motion.forEach((el,i)=>{const r=el.getBoundingClientRect();if(r.bottom>0&&r.top<vh){const p=(r.top+r.height/2-vh/2)/vh;const x=(i%2?-1:1)*p*24;const y2=-p*18;const rot=(i%2?-1:1)*p*1.8;el.style.setProperty('--mx',`${x}px`);el.style.setProperty('--my',`${y2}px`);el.style.setProperty('--rot',`${rot}deg`);el.style.setProperty('--photo-scale',`${1+Math.min(.045,Math.abs(p)*.045)}`)}});if(nav){nav.classList.toggle('scrolled',y>40);nav.style.boxShadow=y>40?'0 18px 50px #5c806d26':'0 12px 35px #5c806d1c'}ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(move);ticking=true}},{passive:true});addEventListener('resize',move);move();
+
+/* Final typography/image QA: prevent display clipping at common desktop widths. */
+const qa=document.createElement('style');qa.textContent=`
+/* Keep editorial Japanese headlines intact instead of letting a single phrase wrap by glyph. */
+.page-hero h1 em,.ac-hero h1 em,.pr-hero h1 em{white-space:nowrap}
+.page-hero h1,.ac-hero h1,.pr-hero h1{overflow-wrap:normal;word-break:keep-all}
+/* Access: readable two-line lockup, never wider than its card. */
+@media(min-width:901px){.ac-hero>.reveal{width:min(620px,58%);padding:30px 34px}.ac-hero h1{font-size:clamp(62px,6.1vw,94px);max-width:620px}.ac-hero h1 em{display:inline-block}.ac-hero p{font-size:15px}.ac-map{inset:130px 4vw 70px}.ac-label{font-size:14px}}
+/* Price: make the headline a deliberate two-line composition. */
+@media(min-width:901px){.pr-hero>div:first-child{max-width:1080px}.pr-hero h1{font-size:clamp(64px,7.2vw,112px);max-width:1050px;margin-left:auto;margin-right:auto}.pr-hero h1 em{display:inline-block}.pr-hero p{max-width:720px}}
+/* Blog: the supplied image lives at repository root; preserve its full frame. */
+.blog-hero .page-photo{background:#fff}.blog-hero .page-photo img{object-fit:contain;background:#fff}
+/* General page imagery: no important subject should be lost to a forced crop. */
+.page-photo img{object-position:center center}
+@media(max-width:900px){.page-hero h1,.ac-hero h1,.pr-hero h1{font-size:clamp(48px,13vw,78px)}.page-hero h1 em,.ac-hero h1 em,.pr-hero h1 em{display:inline-block}.ac-hero>.reveal{width:100%;padding:0;background:transparent;border:0;box-shadow:none}.ac-map{position:relative;inset:auto;margin-top:20px}.pr-hero{text-align:left}.pr-hero h1{max-width:100%}}
+`;
+document.head.appendChild(qa);
