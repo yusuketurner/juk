@@ -26,12 +26,22 @@ const refine=document.createElement('style');refine.textContent=`
 .pr-hero{display:block;text-align:center;padding-top:170px}.pr-hero>div:first-child{max-width:900px;margin:auto}.pr-hero p{margin-left:auto;margin-right:auto}.pr-ticket{max-width:920px;margin:45px auto 0}.pr-stack{inset:0 12%}.pr-card{width:390px}
 .ac-hero{display:block;min-height:790px;padding:150px 6vw 70px}.ac-map{position:absolute;inset:130px 6vw 70px;min-height:0}.ac-hero>.reveal{position:relative;z-index:5;width:min(520px,55%);padding:34px 38px;background:#fffdf5e8;border:1px solid #71978933;border-radius:32px;box-shadow:15px 18px 0 #46695b18;backdrop-filter:blur(12px)}
 }
+/* desktop tablet refinement: preserve the two-line headline while keeping the photo visible */
+@media(min-width:901px) and (max-width:1350px){
+.world-hero{grid-template-columns:minmax(430px,.92fr) minmax(470px,1.08fr);gap:2vw;padding-left:5vw;padding-right:5vw}
+.world-hero h1{font-size:clamp(62px,7vw,92px);letter-spacing:-.075em}
+.world-hero-copy{max-width:560px}
+.world-hero-art{height:560px;max-width:610px}
+.main-photo{inset:3% 3% 5% 10%}
+.small-photo{width:195px;height:175px}
+.sun-burst{width:120px;height:120px}
+}
 @media(max-width:900px){.world-hero h1 span{white-space:normal}.hero-scroll-line{left:20px;width:110px}.hero-motion-orbit{right:7%;bottom:10%;width:75px;height:75px}.study-photo-main img,.about-photo-main img,.people-portrait-main img,.en-photo-main img{object-fit:contain}}
 `;
 document.head.appendChild(refine);
 
 /* Fix the known study hero image typo and keep the full supplied frame visible. */
-document.querySelectorAll('img').forEach(img=>{if(img.src.includes('...'))return;const src=img.getAttribute('src')||'';if(src.includes('GF0f7G2')&&src.includes('CdG2TK'))img.src=src.replace('CdG2TK','CdGq2TK')});
+document.querySelectorAll('img').forEach(img=>{const src=img.getAttribute('src')||'';if(src.includes('GF0f7G2')&&src.includes('CdG2TK'))img.src=src.replace('CdG2TK','CdGq2TK')});
 
 /* Homepage: turn the first screen into a living composition. */
 if(document.body.classList.contains('home-world')){
