@@ -19,34 +19,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build final editorial layers
+      - name: Build final site layers
         run: |
           python - <<'PY'
           from pathlib import Path
           sitemap = '''<div class="footer-sitemap"><div class="footer-sitemap-title"><span>SITEMAP</span><strong>サイトマップ</strong></div><nav class="footer-sitemap-links" aria-label="サイトマップ"><a href="index.html">TOP</a><a href="about.html">私たち</a><a href="study.html">学習塾</a><a href="abacus.html">そろばん</a><a href="english.html">英語</a><a href="price.html">料金</a><a href="teacher.html">先生</a><a href="access.html">アクセス</a><a href="blog.html">ブログ</a><a href="contact.html">無料体験・お問い合わせ</a><a href="privacy.html">プライバシーポリシー</a><a href="sitemap.html">サイトマップ</a></nav></div>'''
-          visual_break = '''<section class="visual-break" aria-label="学びの風景"><div class="visual-break-inner"><div class="visual-break-photo break-photo-main"><img src="2oju7nIXRXYMj5EXMi5f2z-mTLPUeyx_sqi3_oCTzv20dyEluY5mAIaZ6GnfXAo4ZkonswZX54teIfTLYsmvnEYU8Tzldk9V6tSHA-HHB3TwSt53IvnfRZjSXMgpoGB90sYSODOHm_RZekqjH7ZH0GI32-0FEk0UFfgl0K0XTwcgPzQKRctrCWikqcsm1CVy.jpeg" alt="先生と生徒が学ぶ教室の様子" loading="lazy"></div><div class="visual-break-photo break-photo-side"><img src="GF0f7G2EW9j7JtYBlsTXuvc9Zati-fmS6WSeuP0ZU3r13-KfIEWSJCssFpo3jvqyFzF6ypkYAJWDBqGeHluaDLP5ztHBE7lmJUvu4UOB-OYWcOAY0WAOtS23kD1bEs_fxbLZ0o5DxoKd6ZYadVsOKyg5-r6wwhahDIumCdGq2TKsKWZFWU1MI6Y7opp1Wn4Q.jpeg" alt="教室で学ぶ生徒の様子" loading="lazy"></div><div class="visual-break-copy"><span>EVERYDAY LEARNING</span><strong>「わかった！」が、<br>少しずつ増えていく。</strong><p>写真で感じる、煌めき学舎の日常。学ぶ場所だからこそ、楽しさも伝えたい。</p></div><div class="visual-break-doodle break-pencil">✎</div><div class="visual-break-doodle break-star">✦</div><div class="visual-break-doodle break-note">KIRAMEKI<br>DAY BY DAY</div></div></section>'''
-          visual_break_second = '''<section class="visual-break visual-break-second" aria-label="煌めき学舎の学び"><div class="visual-break-inner"><div class="visual-break-photo second-photo-main"><img src="ChatGPT Image 2026年9月10日 22_19_18.png" alt="煌めき学舎の学びを伝える写真コラージュ" loading="lazy"></div><div class="visual-break-photo second-photo-side"><img src="Gemini_Generated_Image_oov12zoov12zoov1.jpg" alt="学びを楽しむ教室のイメージ" loading="lazy"></div><div class="visual-break-copy second-copy"><span>THE PLACE TO LEARN</span><strong>子どもが、<br>また来たくなる場所。</strong><p>写真と余白、イラストを交互に見せながら、スクロールするたびに教室の空気が伝わるTOPへ。</p></div><div class="visual-break-doodle second-doodle">✏︎</div><div class="visual-break-doodle second-circle"></div></div></section>'''
-          photo_only_a = '''<section class="photo-only photo-only-a top-reveal" aria-label="教室の風景"><img src="ChatGPT Image 2026年9月10日 22_19_18.png" alt="明るい教室で学ぶ子どもたち" loading="lazy"></section>'''
-          photo_only_b = '''<section class="photo-only photo-only-b top-reveal" aria-label="学びの風景"><img src="2oju7nIXRXYMj5EXMi5f2z-mTLPUeyx_sqi3_oCTzv20dyEluY5mAIaZ6GnfXAo4ZkonswZX54teIfTLYsmvnEYU8Tzldk9V6tSHA-HHB3TwSt53IvnfRZjSXMgpoGB90sYSODOHm_RZekqjH7ZH0GI32-0FEk0UFfgl0K0XTwcgPzQKRctrCWikqcsm1CVy.jpeg" alt="先生と生徒が向き合う学びの時間" loading="lazy"></section>'''
           for path in Path('.').glob('*.html'):
               text = path.read_text(encoding='utf-8').replace('CdG2TK','CdGq2TK')
               if 'stationery.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="stationery.css"></head>')
-              if path.name=='index.html' and 'home-rhythm.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="home-rhythm.css"></head>')
-              if path.name=='index.html' and 'home-rhythm-v2.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="home-rhythm-v2.css"></head>')
               if 'dayhappy-rebuild.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="dayhappy-rebuild.css"></head>')
               if 'final-polish.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="final-polish.css"></head>')
               if 'soft-curves.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="soft-curves.css"></head>')
-              if path.name=='index.html' and 'top-100.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="top-100.css"></head>')
-              if path.name=='index.html' and 'top-final.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="top-final.css"></head>')
+              if path.name=='index.html' and 'top-rebuild.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="top-rebuild.css"></head>')
               if 'soft-curves.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="soft-curves.js" defer></script></body>')
-              if path.name=='index.html' and 'top-100.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="top-100.js" defer></script></body>')
-              if path.name=='index.html' and 'top-final.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="top-final.js" defer></script></body>')
+              if path.name=='index.html' and 'top-rebuild.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="top-rebuild.js" defer></script></body>')
               if 'footer-sitemap' not in text and '</footer>' in text: text=text.replace('</footer>',sitemap+'</footer>')
-              if path.name=='index.html':
-                  if 'class="visual-break"' not in text and '<section class="world-menu"' in text: text=text.replace('<section class="world-menu"',visual_break+'<section class="world-menu"',1)
-                  if 'visual-break-second' not in text and '<section class="world-kayoi"' in text: text=text.replace('<section class="world-kayoi"',visual_break_second+'<section class="world-kayoi"',1)
-                  if 'photo-only-a' not in text and '<section class="world-intro"' in text: text=text.replace('<section class="world-intro"',photo_only_a+'<section class="world-intro"',1)
-                  if 'photo-only-b' not in text and '<section class="world-kayoi"' in text: text=text.replace('<section class="world-kayoi"',photo_only_b+'<section class="world-kayoi"',1)
               path.write_text(text,encoding='utf-8')
           PY
       - name: Validate complete site
@@ -66,18 +53,18 @@ jobs:
                   if target and target.suffix and not target.exists(): raise SystemExit(f'Missing local asset: {p} -> {src}')
           print(f'Validated {len(htmls)} HTML pages, footer sitemap, and local references.')
           PY
-      - name: Validate TOP art direction
+      - name: Validate TOP rebuild
         run: |
-          test -f top-100.css
-          test -f top-100.js
-          test -f top-final.css
-          test -f top-final.js
-          grep -q 'top-final.css' index.html
-          grep -q 'top-final.js' index.html
-          grep -q 'photo-only-a' index.html
-          grep -q 'photo-only-b' index.html
-          grep -q 'ChatGPT Image 2026年9月10日 22_19_18.png' index.html
-          echo 'TOP final photo-led direction validated.'
+          test -f top-rebuild.css
+          test -f top-rebuild.js
+          grep -q 'top-rebuild.css' index.html
+          grep -q 'top-rebuild.js' index.html
+          grep -q 'class="top-photo-chapter' index.html
+          grep -q 'class="top-photo-pair' index.html
+          grep -q 'class="top-services' index.html
+          ! grep -q 'visual-break' index.html
+          ! grep -q 'photo-only' index.html
+          echo 'TOP rebuilt with photo-led editorial structure.'
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
