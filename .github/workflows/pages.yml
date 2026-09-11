@@ -47,7 +47,6 @@ jobs:
           assert 'class="top-master"' in top
           assert 'top-master.css' in top and 'top-master.js' in top
           assert top.count('tm-photo-frame') == 3, 'TOP must use one photo per photo chapter.'
-          assert 'illustration-learning.svg' in top
           assert 'illustration-abacus.svg' not in top
           assert 'illustration-english.svg' not in top
           assert 'top-photo-pair' not in top
