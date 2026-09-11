@@ -40,6 +40,8 @@ jobs:
                   text = text.replace('</head>', '<link rel="stylesheet" href="home-rhythm-v2.css"></head>')
               if 'dayhappy-rebuild.css' not in text and '</head>' in text:
                   text = text.replace('</head>', '<link rel="stylesheet" href="dayhappy-rebuild.css"></head>')
+              if 'final-polish.css' not in text and '</head>' in text:
+                  text = text.replace('</head>', '<link rel="stylesheet" href="final-polish.css"></head>')
               if 'footer-sitemap' not in text and '</footer>' in text:
                   text = text.replace('</footer>', sitemap + '</footer>')
               if path.name == 'index.html':
@@ -48,6 +50,23 @@ jobs:
                   if 'visual-break-second' not in text and '<section class="world-kayoi"' in text:
                       text = text.replace('<section class="world-kayoi"', visual_break_second + '<section class="world-kayoi"', 1)
               path.write_text(text, encoding='utf-8')
+          PY
+      - name: Validate HTML and asset references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          htmls=list(Path('.').glob('*.html'))
+          assert htmls, 'No HTML files found'
+          for p in htmls:
+              text=p.read_text(encoding='utf-8')
+              assert '<html' in text and '</html>' in text, p
+              for src in re.findall(r'(?:src|href)="([^"]+)"', text):
+                  if src.startswith(('http:','https:','tel:','mailto:','#')): continue
+                  target=Path(src.split('#')[0].split('?')[0])
+                  if target and target.suffix and not target.exists():
+                      raise SystemExit(f'Missing local asset: {p} -> {src}')
+          print(f'Validated {len(htmls)} HTML files and local references.')
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
