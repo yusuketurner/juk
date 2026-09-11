@@ -23,16 +23,16 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import shutil
           sitemap = '''<div class="footer-sitemap"><div class="footer-sitemap-title"><span>SITEMAP</span><strong>サイトマップ</strong></div><nav class="footer-sitemap-links" aria-label="サイトマップ"><a href="index.html">TOP</a><a href="about.html">私たち</a><a href="study.html">学習塾</a><a href="abacus.html">そろばん</a><a href="english.html">英語</a><a href="price.html">料金</a><a href="teacher.html">先生</a><a href="access.html">アクセス</a><a href="blog.html">ブログ</a><a href="contact.html">無料体験・お問い合わせ</a><a href="privacy.html">プライバシーポリシー</a><a href="sitemap.html">サイトマップ</a></nav></div>'''
+          master = Path('index-master.html')
+          if master.exists(): shutil.copyfile(master, 'index.html')
           for path in Path('.').glob('*.html'):
               text = path.read_text(encoding='utf-8').replace('CdG2TK','CdGq2TK')
               if 'stationery.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="stationery.css"></head>')
-              if 'dayhappy-rebuild.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="dayhappy-rebuild.css"></head>')
-              if 'final-polish.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="final-polish.css"></head>')
-              if 'soft-curves.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="soft-curves.css"></head>')
-              if path.name=='index.html' and 'top-rebuild.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="top-rebuild.css"></head>')
-              if 'soft-curves.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="soft-curves.js" defer></script></body>')
-              if path.name=='index.html' and 'top-rebuild.js' not in text and '</body>' in text: text=text.replace('</body>','<script src="top-rebuild.js" defer></script></body>')
+              if path.name != 'index.html' and 'dayhappy-rebuild.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="dayhappy-rebuild.css"></head>')
+              if path.name != 'index.html' and 'final-polish.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="final-polish.css"></head>')
+              if path.name != 'index.html' and 'soft-curves.css' not in text and '</head>' in text: text=text.replace('</head>','<link rel="stylesheet" href="soft-curves.css"></head>')
               if 'footer-sitemap' not in text and '</footer>' in text: text=text.replace('</footer>',sitemap+'</footer>')
               path.write_text(text,encoding='utf-8')
           PY
@@ -43,6 +43,17 @@ jobs:
           import re
           htmls=sorted(Path('.').glob('*.html'))
           assert len(htmls)>=10, f'Expected full multi-page site, found {len(htmls)} HTML files.'
+          top=Path('index.html').read_text(encoding='utf-8')
+          assert 'class="top-master"' in top
+          assert 'top-master.css' in top and 'top-master.js' in top
+          assert top.count('tm-photo-frame') == 3, 'TOP must use one photo per photo chapter.'
+          assert 'illustration-learning.svg' in top
+          assert 'illustration-abacus.svg' not in top
+          assert 'illustration-english.svg' not in top
+          assert 'top-photo-pair' not in top
+          assert 'top-services' not in top
+          assert 'visual-break' not in top
+          assert 'photo-only' not in top
           for p in htmls:
               text=p.read_text(encoding='utf-8')
               assert '<html' in text and '</html>' in text, p
@@ -51,20 +62,8 @@ jobs:
                   if src.startswith(('http:','https:','tel:','mailto:','#')): continue
                   target=Path(src.split('#')[0].split('?')[0])
                   if target and target.suffix and not target.exists(): raise SystemExit(f'Missing local asset: {p} -> {src}')
-          print(f'Validated {len(htmls)} HTML pages, footer sitemap, and local references.')
+          print(f'Validated {len(htmls)} HTML pages and master photo-led TOP.')
           PY
-      - name: Validate TOP rebuild
-        run: |
-          test -f top-rebuild.css
-          test -f top-rebuild.js
-          grep -q 'top-rebuild.css' index.html
-          grep -q 'top-rebuild.js' index.html
-          grep -q 'class="top-photo-chapter' index.html
-          grep -q 'class="top-photo-pair' index.html
-          grep -q 'class="top-services' index.html
-          ! grep -q 'visual-break' index.html
-          ! grep -q 'photo-only' index.html
-          echo 'TOP rebuilt with photo-led editorial structure.'
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
