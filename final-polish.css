@@ -1,0 +1,77 @@
+/* KIRAMEKI FINAL POLISH
+   Editorial school / family site: warm photography + illustration + whitespace.
+   Loaded last so it can safely refine every page without rebuilding the HTML. */
+:root{--fp-ink:#47685a;--fp-paper:#fffdf7;--fp-yellow:#ffe48d;--fp-pink:#f4cbd4;--fp-mint:#dff2e7;--fp-blue:#dceef6;--fp-orange:#e98b5c}
+html{scroll-behavior:smooth}
+body{background:var(--fp-paper);color:var(--fp-ink)}
+img{max-width:100%;}
+a:focus-visible,button:focus-visible{outline:3px solid var(--fp-orange);outline-offset:4px}
+.nav{z-index:100}
+.nav .cta{background:var(--fp-orange);color:#fff}
+/* The footer becomes a real destination, not an afterthought. */
+footer .footer-sitemap{margin-top:45px;padding-top:30px;border-top:1px solid #47685a33}
+footer .footer-sitemap-title{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+footer .footer-sitemap-title span{font:900 10px/1 'DM Sans',sans-serif;letter-spacing:.18em}
+footer .footer-sitemap-title strong{font-size:15px}
+footer .footer-sitemap-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 22px}
+footer .footer-sitemap-links a{font-size:12px;padding:7px 0;border-bottom:1px dashed #47685a33}
+footer .footer-sitemap-links a:hover{color:var(--fp-orange);transform:translateX(3px)}
+/* Make the top page feel like a visual story: large image, quiet space, then a focused action. */
+.home-world .world-intro{min-height:680px}
+.home-world .world-intro .intro-copy{max-width:600px}
+.home-world .world-intro .intro-copy h2{max-width:560px}
+.home-world .world-experience{padding-top:135px;padding-bottom:155px}
+.home-world .world-menu{padding-top:155px}
+.home-world .world-menu-grid{align-items:start}
+.home-world .world-menu-card{transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s}
+.home-world .world-menu-card:nth-child(1):hover{transform:translateY(-10px) rotate(-1.5deg)}
+.home-world .world-menu-card:nth-child(2):hover{transform:translateY(65px) rotate(1deg)}
+.home-world .world-menu-card:nth-child(3):hover{transform:translateY(-35px) rotate(-1deg)}
+.home-world .world-kayoi{min-height:650px}
+.home-world .world-price{min-height:360px}
+/* Inner pages: every hero gets a distinct visual anchor while retaining a common brand language. */
+.about-world .about-story,.study-world .study-method,.people-world .people-message,.ab-page .ab-rhythm,.english-page .en-story,.pr-page .pr-rule,.ac-page .ac-route{scroll-margin-top:100px}
+.about-world .about-story{position:relative}
+.about-world .about-story:before{content:'50+';position:absolute;right:6vw;top:80px;font:900 clamp(100px,16vw,230px)/.8 'DM Sans',sans-serif;color:var(--fp-yellow);opacity:.45;letter-spacing:-.08em;pointer-events:none}
+.about-world .about-story>*{position:relative;z-index:1}
+.about-world .about-timeline{background:var(--fp-mint)}
+.people-world .people-message{background:var(--fp-paper)}
+.people-world .people-gallery{background:var(--fp-pink)}
+.people-world .people-gallery img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.people-world .people-gallery figure:hover img{transform:scale(1.035)}
+.study-world .study-path{background:var(--fp-yellow);position:relative;overflow:hidden}
+.study-world .study-path:after{content:'LEARN / TRY / GROW';position:absolute;right:5vw;bottom:55px;font:900 11px/1 'DM Sans',sans-serif;letter-spacing:.2em;transform:rotate(-5deg);opacity:.55}
+.study-world .study-method{background:var(--fp-paper)}
+.ab-page .ab-rhythm{background:var(--fp-mint)}
+.ab-page .ab-flow{background:var(--fp-yellow)}
+.ab-page .ab-step{position:relative}
+.ab-page .ab-step:before{content:'→';position:absolute;left:-34px;top:25px;color:var(--fp-orange);font-weight:900}
+.english-page .en-story{background:var(--fp-paper)}
+.english-page .en-course-stack article:hover{background:#fff9!important;padding-left:14px;padding-right:14px}
+.pr-page .pr-rule{background:var(--fp-yellow)}
+.pr-page .pr-course{transition:background .35s,transform .35s}
+.pr-page .pr-course:hover{background:#fff!important;transform:translateY(-4px)}
+.ac-page .ac-route{background:var(--fp-blue)}
+.ac-page .ac-facts{background:var(--fp-paper)}
+.blog-page .blog-photo img{object-fit:contain;background:#fff}
+/* A quiet horizontal label makes the page feel editorial rather than template-driven. */
+.world-marquee{letter-spacing:.01em}
+.world-marquee b{color:var(--fp-yellow)}
+/* Shared CTA: friendly and tangible, never aggressive. */
+.cta,.button,.btn{transition:transform .25s ease,box-shadow .25s ease}
+.cta:hover,.button:hover,.btn:hover{transform:translateY(-3px);box-shadow:0 10px 22px #47685a24}
+/* Mobile: preserve the visual rhythm without creating an endless stack of oversized cards. */
+@media(max-width:900px){
+  footer .footer-sitemap-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px}
+  footer .footer-sitemap{margin-top:32px;padding-top:24px}
+  .home-world .world-intro{min-height:auto;padding-top:105px;padding-bottom:90px}
+  .home-world .world-experience{padding-top:90px;padding-bottom:105px}
+  .home-world .world-menu{padding-top:95px;padding-bottom:110px}
+  .home-world .world-menu-card:nth-child(1),.home-world .world-menu-card:nth-child(2),.home-world .world-menu-card:nth-child(3),.home-world .world-menu-card:nth-child(1):hover,.home-world .world-menu-card:nth-child(2):hover,.home-world .world-menu-card:nth-child(3):hover{transform:none}
+  .home-world .world-kayoi{min-height:auto}
+  .about-world .about-story:before{right:10px;top:30px;font-size:110px}
+  .study-world .study-path:after{right:20px;bottom:28px;font-size:8px}
+  .ab-page .ab-step:before{display:none}
+  .people-world .people-gallery{padding-top:90px;padding-bottom:90px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cta,.button,.btn,.world-menu-card,.people-world .people-gallery img{transition:none!important}}
