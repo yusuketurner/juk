@@ -1,0 +1,55 @@
+/* KIRAMEKI — soft curves / flowing photo reveals */
+:root{--soft-paper:#fffdf8;--soft-ink:#47685a;--soft-mint:#e5f5ec;--soft-blue:#e8f3f7;--soft-yellow:#fff0b2;--soft-pink:#f8dfe5}
+body{background:var(--soft-paper)}
+/* DAY HAPPY-inspired composition: large organic white shapes gently overlap photographs. */
+.home-world .world-hero:after,.about-world .about-hero:after,.study-world .study-hero:after,.people-world .people-hero:after,.english-page .en-hero:after{height:29%;border-radius:70% 30% 0 0/90% 90% 0 0;box-shadow:0 -20px 70px rgba(71,104,90,.08)}
+.home-world .world-intro{border-radius:130px 130px 0 0;margin-top:-2px;padding-top:210px}
+.home-world .world-intro:before{content:"";position:absolute;left:7vw;right:7vw;top:72px;height:1px;background:rgba(71,104,90,.12);border-radius:999px}
+/* Add more illustration moments without returning to card-heavy UI. */
+.home-world .world-intro .intro-map:after{content:"";position:absolute;inset:auto auto 0 0;width:48%;height:48%;background:url('assets/illustration-pencil.svg') center/contain no-repeat;transform:translate(-16%,12%) rotate(-6deg);opacity:.96}
+.home-world .world-intro .intro-map{min-height:440px}
+.home-world .visual-break,.home-world .visual-break-second{position:relative;overflow:hidden;border-radius:120px 0 0 0;padding-top:180px;padding-bottom:190px}
+.home-world .visual-break:before,.home-world .visual-break-second:before{content:"";position:absolute;left:-8%;right:-8%;top:-120px;height:230px;background:var(--soft-paper);border-radius:0 0 55% 45%/0 0 100% 100%;z-index:1}
+.home-world .visual-break:after{content:"";position:absolute;right:4vw;bottom:35px;width:210px;height:160px;background:url('assets/illustration-book.svg') center/contain no-repeat;opacity:.9;z-index:2;transform:rotate(5deg)}
+.home-world .visual-break-second:after{content:"";position:absolute;left:3vw;bottom:40px;width:190px;height:145px;background:url('assets/illustration-school.svg') center/contain no-repeat;opacity:.9;z-index:2;transform:rotate(-5deg)}
+.home-world .visual-break-inner{z-index:3}
+.home-world .visual-break-photo{border-radius:70px!important}
+.home-world .break-photo-main{border-radius:92px 32px 82px 38px!important}
+.home-world .break-photo-side{border-radius:38px 82px 42px 72px!important}
+.home-world .visual-break-copy{border-radius:48px 18px 44px 24px;box-shadow:10px 14px 0 rgba(71,104,90,.12)}
+/* Make the service illustrations the visual anchor, with handwritten-like surrounding accents. */
+.home-world .world-menu{position:relative;padding-top:210px;padding-bottom:210px}
+.home-world .world-menu:before{content:"";position:absolute;left:0;right:0;top:-95px;height:190px;background:var(--soft-paper);border-radius:50% 50% 0 0/100% 100% 0 0}
+.home-world .world-menu:after{content:"✦   ✎   ○   ☆";position:absolute;right:8vw;top:90px;font-size:34px;letter-spacing:.3em;color:#df8797;transform:rotate(5deg);opacity:.65}
+.home-world .world-menu-card:before{height:300px}
+.home-world .world-menu-card:nth-child(1):after{content:"まずは、やってみよう。";display:block;margin-top:28px;font-size:12px;letter-spacing:.08em;color:#7a9588}
+.home-world .world-menu-card:nth-child(2):after{content:"数字と仲よくなる。";display:block;margin-top:28px;font-size:12px;letter-spacing:.08em;color:#7a9588}
+.home-world .world-menu-card:nth-child(3):after{content:"世界が、ぐっと近くなる。";display:block;margin-top:28px;font-size:12px;letter-spacing:.08em;color:#7a9588}
+/* Photo rhythm: each visual break enters from a different direction, like images appearing while scrolling. */
+.scroll-photo{opacity:0;transform:translateY(70px) scale(.965) rotate(var(--r,0deg));transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.scroll-photo.from-left{transform:translateX(-90px) rotate(var(--r,0deg)) scale(.965)}
+.scroll-photo.from-right{transform:translateX(90px) rotate(var(--r,0deg)) scale(.965)}
+.scroll-photo.is-visible{opacity:1;transform:translate3d(0,0,0) rotate(var(--r,0deg)) scale(1)}
+.scroll-photo.is-visible img{transform:scale(1.015);transition:transform 1.5s cubic-bezier(.2,.8,.2,1)}
+.scroll-illustration{opacity:0;transform:translateY(35px) rotate(-4deg);transition:opacity .8s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.scroll-illustration.is-visible{opacity:1;transform:translateY(0) rotate(0)}
+/* Curved editorial separators across the TOP. */
+.home-world .world-marquee{border-radius:0 0 70px 70px;margin-bottom:-1px;padding:22px 0;background:#5d806e}
+.home-world .world-kayoi{border-radius:110px 110px 0 0;position:relative;margin-top:-40px;padding-top:200px}
+.home-world .world-final{border-radius:120px 120px 0 0;padding-top:190px}
+/* Softer corners everywhere; never turn the layout into uniform cards. */
+.home-world .experience-card,.home-world .price-bubbles div{border-radius:42px}
+@media(max-width:900px){
+ .home-world .world-hero:after,.about-world .about-hero:after,.study-world .study-hero:after,.people-world .people-hero:after,.english-page .en-hero:after{height:22%;border-radius:72% 28% 0 0/90% 90% 0 0}
+ .home-world .world-intro{border-radius:70px 70px 0 0;padding-top:135px}
+ .home-world .world-intro:before{top:45px}
+ .home-world .world-intro .intro-map{min-height:330px}
+ .home-world .visual-break,.home-world .visual-break-second{border-radius:70px 0 0 0;padding-top:125px;padding-bottom:140px}
+ .home-world .visual-break:before,.home-world .visual-break-second:before{top:-70px;height:140px}
+ .home-world .visual-break:after,.home-world .visual-break-second:after{width:125px;height:100px;bottom:20px}
+ .home-world .world-menu{padding-top:145px;padding-bottom:150px}
+ .home-world .world-menu:before{top:-55px;height:110px}
+ .home-world .world-kayoi{border-radius:70px 70px 0 0;margin-top:-20px;padding-top:130px}
+ .home-world .world-final{border-radius:70px 70px 0 0;padding-top:135px}
+}
+@media(prefers-reduced-motion:reduce){.scroll-photo,.scroll-photo.from-left,.scroll-photo.from-right,.scroll-illustration{opacity:1;transform:none;transition:none}.scroll-photo.is-visible{transform:none}}
