@@ -32,6 +32,7 @@ jobs:
 
           for path in Path('.').glob('*.html'):
               text = path.read_text(encoding='utf-8')
+              text = text.replace('CdG2TK','CdGq2TK')
               if 'stationery.css' not in text and '</head>' in text:
                   text = text.replace('</head>', '<link rel="stylesheet" href="stationery.css"></head>')
               if path.name == 'index.html' and 'home-rhythm.css' not in text and '</head>' in text:
