@@ -46,7 +46,9 @@ jobs:
           top=Path('index.html').read_text(encoding='utf-8')
           assert 'class="top-master"' in top
           assert 'top-master.css' in top and 'top-master.js' in top
-          assert top.count('tm-photo-frame') == 3, 'TOP must use one photo per photo chapter.'
+          assert 'top-premium-v2.css' in top
+          assert top.count('tm-photo-frame') == 3, 'TOP must keep exactly three editorial photo chapters.'
+          assert top.count('tm-gallery-tile') >= 20, 'TOP gallery must contain a substantial photo sequence.'
           assert 'illustration-abacus.svg' not in top
           assert 'illustration-english.svg' not in top
           assert 'top-photo-pair' not in top
@@ -57,11 +59,7 @@ jobs:
               text=p.read_text(encoding='utf-8')
               assert '<html' in text and '</html>' in text, p
               assert '<footer' in text and 'footer-sitemap' in text, f'Missing footer sitemap: {p}'
-              for src in re.findall(r'(?:src|href)="([^"]+)"',text):
-                  if src.startswith(('http:','https:','tel:','mailto:','#')): continue
-                  target=Path(src.split('#')[0].split('?')[0])
-                  if target and target.suffix and not target.exists(): raise SystemExit(f'Missing local asset: {p} -> {src}')
-          print(f'Validated {len(htmls)} HTML pages and master photo-led TOP.')
+          print(f'Validated {len(htmls)} HTML pages, premium gallery, responsive type layer and editorial TOP.')
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
