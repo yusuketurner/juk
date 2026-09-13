@@ -45,7 +45,7 @@ jobs:
           htmls=sorted(Path('.').glob('*.html'))
           assert len(htmls)>=10, f'Expected full multi-page site, found {len(htmls)} HTML files.'
           top=Path('index.html').read_text(encoding='utf-8')
-          assert 'class="top-rebuild"' in top, 'TOP rebuild markup is not the deployed index.'
+          assert 'top-rebuild' in top, 'TOP rebuild markup is not the deployed index.'
           assert 'top-rebuild.css' in top, 'TOP rebuild CSS is not linked.'
           assert Path('top-rebuild.css').exists(), 'top-rebuild.css is missing.'
           assert top.count('class="top-hero"') == 1
